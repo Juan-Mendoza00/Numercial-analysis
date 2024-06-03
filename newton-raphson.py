@@ -4,15 +4,25 @@ import matplotlib.pyplot as plt
 
 init_printing()
 
-# let's print some functions in the terminal
 x, y, z = symbols('x y z')
 
-expression = y*exp(2*x) - 2*x*y + (y**2)*(x**3)
+expression = input('Write your function')
 
-print(expression)
+# convert it to sympy expression object
+func = sympify(expression).expand()
 
-x = np.linspace(-10,10,100)
-y = x**2
+# Converted to a function
+f = lambdify(x, func)
 
-plt.plot(x,y)
-plt.show()
+# compute the first derivate
+df = lambdify(x, func.diff(x))
+
+print(f"f(x) = {func} \nf'(x) = {func.diff(x)}")
+
+
+
+# x = np.linspace(-10,10,100)
+# y = x**2
+
+# plt.plot(x,y)
+# plt.show()
